@@ -21,7 +21,7 @@ Currently under development
  
 ## Download of reference databases 
 
- Users can flexibly customize the reference data (see here)
+ Users can flexibly customize the reference data (see [here](https://github.com/dzhao2019/eukfindertest/wiki/Build-a-customized-reference-database))
  
  Default reference databases can be downloaded from [Eukfinder Databases](https://perun.biochem.dal.ca/Metagenomics-Scavenger/)
 
