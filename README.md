@@ -23,7 +23,7 @@ Currently under development
 
  Users can flexibly customize the reference data (see here)
  
- Default reference databases can be downloaded from ![Eukfinder Databases](https://perun.biochem.dal.ca/Metagenomics-Scavenger/)
+ Default reference databases can be downloaded from [Eukfinder Databases](https://perun.biochem.dal.ca/Metagenomics-Scavenger/)
 
 
 <!-- USAGE EXAMPLES -->
