@@ -36,10 +36,10 @@ git clone https://github.com/dzhao2019/eukfindertest.git
 
 
 ```sh
-conda env create -f eukfinder.yml
+conda env create -f eukfindertest.yml
 
 # activate it
-source activate eukfinder
+source activate eukfindertest
 ```
 
 <br>
