@@ -22,7 +22,7 @@ A step-by-step tutorial on installation.
 
 Note: We are working to making DeepMicrobes available on Bioconda, so that this tutorial may be frequently updated.
 
-###1. Clone this repository
+### 1. Clone this repository
 
 ```sh
 git clone https://github.com/dzhao2019/eukfindertest.git
@@ -30,9 +30,9 @@ git clone https://github.com/dzhao2019/eukfindertest.git
 
 <br>
 
-###2. Create a conda environment for DeepMicrobes
+### 2. Create a conda environment for DeepMicrobes
 
-(Optional) Please install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) first.
+Please install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) first.
 
 
 ```sh
@@ -47,12 +47,10 @@ source activate eukfindertest
 ### 3. Install other dependencies
 
 (Required) Install PLAST <br>
-download the tool
+
 ```sh
 wget https://github.com/PLAST-software/plast-library/releases/download/v2.3.2/plastbinary_linux_v2.3.2.tar.gz
 tar -zxf plastbinary_linux_v2.3.2.tar.gz
-```       
-```sh
 export PATH=/path/to/plastbinary_linux_v2.3.2/bin:$PATH
 ```
 (Required) Install `acc2tax` <br>
@@ -62,8 +60,7 @@ https://github.com/richardmleggett/acc2tax
 
 ### 4. Download or build databases
  
- Download of reference databases 
- Default reference databases can be downloaded from [Eukfinder Databases](https://perun.biochem.dal.ca/Metagenomics-Scavenger/)
+  Default reference databases can be downloaded from [Eukfinder Databases](https://perun.biochem.dal.ca/Metagenomics-Scavenger/)
 - Plast Database
 - Centrifuge Database
 - acc2tax Database
