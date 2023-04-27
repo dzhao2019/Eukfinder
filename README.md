@@ -17,13 +17,12 @@ Currently under development
 
 
 ## Installation 
-# How to install Eukfinder
 
 A step-by-step tutorial on installation.
 
 Note: We are working to making DeepMicrobes available on Bioconda, so that this tutorial may be frequently updated.
 
-# 1. Clone this repository
+###1. Clone this repository
 
 ```sh
 git clone https://github.com/dzhao2019/eukfindertest.git
@@ -31,7 +30,7 @@ git clone https://github.com/dzhao2019/eukfindertest.git
 
 <br>
 
-# 2. Create a conda environment for DeepMicrobes
+###2. Create a conda environment for DeepMicrobes
 
 (Optional) Please install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) first.
 
@@ -45,7 +44,7 @@ source activate eukfinder
 
 <br>
 
-# 3. Install other dependencies
+### 3. Install other dependencies
 
 (Required) Install PLAST <br>
 download the tool
@@ -61,16 +60,16 @@ https://github.com/richardmleggett/acc2tax
 
 <br>
 
-# 4. Download databases
+### 4. Download or build databases
  
-## Download of reference databases 
-
- Users can flexibly customize the reference data (see [here](https://github.com/dzhao2019/eukfindertest/wiki/Build-a-customized-reference-database))
- 
+ Download of reference databases 
  Default reference databases can be downloaded from [Eukfinder Databases](https://perun.biochem.dal.ca/Metagenomics-Scavenger/)
 - Plast Database
 - Centrifuge Database
 - acc2tax Database
+
+ Users can flexibly customize the reference data (see [here](https://github.com/dzhao2019/eukfindertest/wiki/Build-a-customized-reference-database))
+ 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
