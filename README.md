@@ -7,7 +7,8 @@ A bioinformatics tool designed to enable rapid recovery of high-quality draft ge
 
 
 ## Overview
-![Graphical_abstract](https://user-images.githubusercontent.com/39600837/215847526-31479e80-fa55-48b0-a56f-643d166db5e5.png)
+
+![Graphical_abstract](https://user-images.githubusercontent.com/39600837/235653095-c4686819-354c-4252-ad13-960420e46d12.png)
 
 ## Publication/Citation
 Currently under development
