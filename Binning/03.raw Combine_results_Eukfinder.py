@@ -1,3 +1,5 @@
+03.raw Combine_results_Eukfinder.py
+
 import os, sys, re                                                                          
 import argparse
 from Bio import SeqIO
