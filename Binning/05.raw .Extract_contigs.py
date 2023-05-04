@@ -1,7 +1,6 @@
 """  
+05.raw .Extract_contigs.py
 Extract configs from fasta file.                                                                               
- 
-
 Version 1, Nov 18th, 2019
 Author: D.Z.                                                
 """                                                                                 
