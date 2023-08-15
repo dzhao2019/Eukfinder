@@ -171,7 +171,9 @@ Required arguments:
                         Classification for un-pair end reads
 
 
+
 **Eukfinder long_seqs**
+
 usage: Eukfinder long_seqs [-h] -l LONG_SEQS -o OUT_NAME --mhlen MHLEN --cdb
                            CDB -n NUMBER_OF_THREADS -z NUMBER_OF_CHUNKS -t
                            TAXONOMY_UPDATE -p PLAST_DATABASE -m PLAST_ID_MAP
@@ -209,7 +211,9 @@ Required arguments:
   --pid PID, --percent_id PID
                         percentage identity for plast searches
   --cov COV, --coverage COV
-                        percentage coverage for plast searches                        
+                        percentage coverage for plast searches
+
+                   
 <!-- ROADMAP -->
 ## Roadmap
 
