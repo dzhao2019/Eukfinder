@@ -110,7 +110,106 @@ Required arguments:
                         
   --cdb CDB, --centrifuge-database CDB    path to centrifuge database
   
-  
+**Eukfinder short_seqs**
+usage: Eukfinder short_seqs [-h] --r1 R1 --r2 R2 --un UN -o OUT_NAME -n
+                            NUMBER_OF_THREADS -z NUMBER_OF_CHUNKS -t
+                            TAXONOMY_UPDATE -p PLAST_DATABASE -m PLAST_ID_MAP
+                            [-p2 ANCILLARY_PLAST_DATABASE]
+                            [-m2 ANCILLARY_PLAST_ID_MAP]
+                            [--force-pdb FORCE_PDB] -a ACC2TAX_DATABASE --cdb
+                            CDB -e E_VALUE --pid PID --cov COV --max_m MAX_M
+                            --mhlen MHLEN --pclass PCLASS --uclass UCLASS
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p2 ANCILLARY_PLAST_DATABASE, --ancillary-plast-database ANCILLARY_PLAST_DATABASE
+                        path to plast database
+  -m2 ANCILLARY_PLAST_ID_MAP, --ancillary-plast-id-map ANCILLARY_PLAST_ID_MAP
+                        path to taxonomy map for plast database
+  --force-pdb FORCE_PDB, --force_plast_database FORCE_PDB
+                        impose the declared plast_database
+
+Required arguments:
+  Description
+
+  --r1 R1, --reads-r1 R1
+                        left reads
+  --r2 R2, --reads-r2 R2
+                        right reads
+  --un UN, --un-pair-reads UN
+                        orphan reads
+  -o OUT_NAME, --out_name OUT_NAME
+                        out name
+  -n NUMBER_OF_THREADS, --number-of-threads NUMBER_OF_THREADS
+                        Number of threads
+  -z NUMBER_OF_CHUNKS, --number-of-chunks NUMBER_OF_CHUNKS
+                        Number of chunks to split a file
+  -t TAXONOMY_UPDATE, --taxonomy-update TAXONOMY_UPDATE
+                        Set to True the first time the program is used.
+                        Otherwise set to False
+  -p PLAST_DATABASE, --plast-database PLAST_DATABASE
+                        path to plast database
+  -m PLAST_ID_MAP, --plast-id-map PLAST_ID_MAP
+                        path to taxonomy map for plast database
+  -a ACC2TAX_DATABASE, --acc2tax-database ACC2TAX_DATABASE
+                        path to acc2tax database
+  --cdb CDB, --centrifuge-database CDB
+                        path to centrifuge database
+  -e E_VALUE, --e-value E_VALUE
+                        threshold for plast searches
+  --pid PID, --percent_id PID
+                        percentage identity for plast searches
+  --cov COV, --coverage COV
+                        percentage coverage for plast searches
+  --max_m MAX_M, --max_memory MAX_M
+                        Maximum memomry allocated to carry out an assembly
+  --mhlen MHLEN, --min-hit-length MHLEN
+                        Maximum memomry allocated to carry out an assembly
+  --pclass PCLASS, --p-reads-class PCLASS
+                        Classification for pair end reads
+  --uclass UCLASS, --u-reads-class UCLASS
+                        Classification for un-pair end reads
+
+
+**Eukfinder long_seqs**
+usage: Eukfinder long_seqs [-h] -l LONG_SEQS -o OUT_NAME --mhlen MHLEN --cdb
+                           CDB -n NUMBER_OF_THREADS -z NUMBER_OF_CHUNKS -t
+                           TAXONOMY_UPDATE -p PLAST_DATABASE -m PLAST_ID_MAP
+                           -a ACC2TAX_DATABASE -e E_VALUE --pid PID --cov COV
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+Required arguments:
+  Description
+
+  -l LONG_SEQS, --long-seqs LONG_SEQS
+                        long sequences file
+  -o OUT_NAME, --out_name OUT_NAME
+                        out name
+  --mhlen MHLEN, --min-hit-length MHLEN
+                        minimum hit length
+  --cdb CDB, --centrifuge-database CDB
+                        path to centrifuge database
+  -n NUMBER_OF_THREADS, --number-of-threads NUMBER_OF_THREADS
+                        Number of threads
+  -z NUMBER_OF_CHUNKS, --number-of-chunks NUMBER_OF_CHUNKS
+                        Number of chunks to split a file
+  -t TAXONOMY_UPDATE, --taxonomy-update TAXONOMY_UPDATE
+                        Set to True the first time the program is used.
+                        Otherwise set to False
+  -p PLAST_DATABASE, --plast-database PLAST_DATABASE
+                        path to plast database
+  -m PLAST_ID_MAP, --plast-id-map PLAST_ID_MAP
+                        path to taxonomy map for plast database
+  -a ACC2TAX_DATABASE, --acc2tax-database ACC2TAX_DATABASE
+                        path to acc2tax database
+  -e E_VALUE, --e-value E_VALUE
+                        threshold for plast searches
+  --pid PID, --percent_id PID
+                        percentage identity for plast searches
+  --cov COV, --coverage COV
+                        percentage coverage for plast searches                        
 <!-- ROADMAP -->
 ## Roadmap
 
