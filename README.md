@@ -21,7 +21,7 @@ Currently under development
 
 A step-by-step tutorial on installation.
 
-Note: We are working to making DeepMicrobes available on Bioconda, so that this tutorial may be frequently updated.
+Note: We are working to making Eukfinder available on Bioconda, so that this tutorial may be frequently updated.
 
 ### 1. Clone this repository
 
@@ -31,7 +31,7 @@ git clone https://github.com/dzhao2019/eukfindertest.git
 
 <br>
 
-### 2. Create a conda environment for DeepMicrobes
+### 2. Create a conda environment for Eukfinder
 
 Please install [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) first.
 
