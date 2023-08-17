@@ -16,8 +16,10 @@ Currently under development
 
 ## Requirements
 Python >= 3.7
+
 ete3,numpy, pandas, joblib, pyqt, spades, seqkit, trimmomatic, bowtie2, centrifuge, acc2tax, plast
 
+<br>
 ## Installation 
 
 A step-by-step tutorial on installation.
