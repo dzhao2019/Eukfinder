@@ -74,16 +74,22 @@ https://github.com/richardmleggett/acc2tax
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+See [Wiki](https://github.com/dzhao2019/eukfindertest/wiki) for detailed description
 
 **Eukfinder read_prep**
-usage: Eukfinder read_prep [-h] --r1 R1 --r2 R2 -n THREADS -i ILLUMINA_CLIP
-                           --hcrop HCROP -l LEADING_TRIM -t TRAIL_TRIM --wsize
-                           WSIZE --qscore QSCORE --mlen MLEN --hg HG -o
-                           OUT_NAME --cdb CDB
+Run Trimmomatic to remove low quality reads, and adaptors
+Run Bowtie2 to remove host reads
+Run Centrifuge for first round of classification
+
+    Eukfinder read_prep [-h] --r1 R1 --r2 R2 -n THREADS -i ILLUMINA_CLIP
+                               --hcrop HCROP -l LEADING_TRIM -t TRAIL_TRIM --wsize
+                               WSIZE --qscore QSCORE --mlen MLEN --hg HG -o
+                               OUT_NAME --cdb CDB
 
   
 **Eukfinder short_seqs**
-usage: Eukfinder short_seqs [-h] --r1 R1 --r2 R2 --un UN -o OUT_NAME -n
+
+    Eukfinder short_seqs [-h] --r1 R1 --r2 R2 --un UN -o OUT_NAME -n
                             NUMBER_OF_THREADS -z NUMBER_OF_CHUNKS -t
                             TAXONOMY_UPDATE -p PLAST_DATABASE -m PLAST_ID_MAP
                             [-p2 ANCILLARY_PLAST_DATABASE]
@@ -95,7 +101,7 @@ usage: Eukfinder short_seqs [-h] --r1 R1 --r2 R2 --un UN -o OUT_NAME -n
 
 **Eukfinder long_seqs**
 
-usage: Eukfinder long_seqs [-h] -l LONG_SEQS -o OUT_NAME --mhlen MHLEN --cdb
+    Eukfinder long_seqs [-h] -l LONG_SEQS -o OUT_NAME --mhlen MHLEN --cdb
                            CDB -n NUMBER_OF_THREADS -z NUMBER_OF_CHUNKS -t
                            TAXONOMY_UPDATE -p PLAST_DATABASE -m PLAST_ID_MAP
                            -a ACC2TAX_DATABASE -e E_VALUE --pid PID --cov COV
