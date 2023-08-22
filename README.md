@@ -128,10 +128,15 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Citation
+Dandan Zhao, Dayana E. Salas-Leiva, Shelby K. Williams, Andrew J. Roger, Eukfinder: a pipeline to retrieve microbial eukaryote genomes from metagenomic sequencing data (In preparation for submission)
+
 
 
 <!-- CONTACT -->
 ## Contact
+d.taya.zhao@gmail.com
+dayana.salas.leiva@gmail.com
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
