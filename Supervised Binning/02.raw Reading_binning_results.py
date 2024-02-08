@@ -1,3 +1,13 @@
+"""  
+Read in binning results from Maxbin, Metabat2 and MyCC, and combine results into one table.                                                  
+"""   
+
+#   Info  #
+__author__ = 'Dandan Zhao'
+__email__ = 'd.zhao@dal.ca'
+__version__ = '1.0.0'
+#   End Info   #
+
 # 02.raw Reading_binning_results.py
 import os, sys
 import argparse

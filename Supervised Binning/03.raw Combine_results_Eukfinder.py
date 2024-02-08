@@ -1,6 +1,15 @@
-03.raw Combine_results_Eukfinder.py
+"""  
+Read in results from step 1 & 2 and Metaxa2, and combine results into one table.                                                  
+"""   
 
-import os, sys, re                                                                          
+
+#   Info  #
+__author__ = 'Dandan Zhao'
+__email__ = 'd.zhao@dal.ca'
+__version__ = '1.0.0'
+#   End Info   #
+
+import os, sys, re              
 import argparse
 from Bio import SeqIO
 import subprocess
