@@ -1,0 +1,19 @@
+name: eukfinder
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - python
+  - ete3
+  - numpy
+  - pandas
+  - joblib
+  - pyqt=5
+  - spades
+  - seqkit
+  - trimmomatic
+  - centrifuge
+  - bowtie2
