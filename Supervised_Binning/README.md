@@ -44,17 +44,41 @@ Copy and rename the file
    ```sh
    cp TempEukfinder/EUnk.fasta Eukfinder_long.fasta
    ```
+
 #### 2.1 Run Plast against nt database:
 Launch the shell run_Plast.sh
 
-DB=/scratch5/db/Eukfinder/nt2021/nt.fasta
+   ```sh
+   source activate eukfinder
+   query=Eukfinder_long.fasta
+   # Run plast
+   DB=/scratch5/db/Eukfinder/nt2021/nt.fasta
+   plast -e 1E-5 -max-hit-per-query 1 -outfmt 1 -a 48 -p plastn -i $query -d $DB -force-query-order 1000 -o ${query::-6}.PLAST_nt.tsv
 
+   ```
+
+result file:
+Eukfinder_long.PLAST_nt.tsv
 
 #### 2.2 Run BLAST against Mitochondrial database to detect mitochondrial contigs
 
 Run Blast_mito.sh
 
-BLASTDB=/scratch5/db/Eukfinder/Mitochondrial
+   ```sh
+   cquery=Eukfinder_long.fasta
+   source activate blast
+   export BLASTDB=/scratch5/db/Eukfinder/Mitochondrial
+   DB=mito_blast_db
+   blastn -db $DB -query $query -out ${query::-6}_BLAST4Mit.out -num_threads 30 \
+          -outfmt "6 qseqid sseqid stitle evalue pident qcovhsp nident mismatch length slen qlen qstart qend sstart send staxids sscinames sskingdoms"  \
+          -evalue 1E-5 -max_hsps 1
+   conda deactivate
+
+   ```
+
+result file:
+Eukfinder_long_BLAST4Mit.out
+
 
 #### 2.3 Use Metaxa2 to detect LSU and SSU rDNA sequences
 
