@@ -1,19 +1,51 @@
-# Supervised Binning Steps
+# Supervised Binning for Recovering Eukaryotic Genomes from Metagenomes
 
 ## Overview
 
-Below we present list of instructions that lead to recover eukaryotic genomes from metagenomes after running Eukfinder.
+This workflow is designed to help recover eukaryotic genomes from metagenomic datasets through supervised binning after running Eukfinder. Below, you will find a detailed guide on how to set up and run the analysis, along with explanations for each step..
 
-The pipeline
-1. Parse centrifuge results
-2. Run PLAST against nt database 
-3. BLAST against Mitochondrial database.
-4. Map reads to the selected contigs to get the information about the coverage and use it for run binning tools
-5. Refine binning results
+### Workflow 
 
 
+1. Prepare Input Files
+You need the following input files before starting:
 
-## Step 1. Parse centrifuge result:
+- A FASTA file of assembled contigs (EUnk.fasta from Eukfinder_short or Eukfinder_long).
+- Results from various tools, including Centrifuge, Plast, Blast, Metaxa2, and MyCC.
+
+2. Run Parsing Scripts
+Scripts are provided to process results from the tools mentioned above and integrate them into a single analysis pipeline.
+
+3. Generate Output
+The pipeline produces two main outputs:
+
+- A FASTA file containing the recovered eukaryotic nuclear genome.
+- A FASTA file containing the recovered mitochondrial genome.
+
+## Step-by-Step Instructions
+
+### Step 1. Prepare the Environment
+
+Ensure that you have the following tools and Python libraries installed:
+
+- Python (version 3.6+)
+- pandas, Centrifuge, Plast (included in Eukfinder)
+- Biopython
+  Install via pip install biopython.
+- Blast, MyCC, and Metaxa2.
+
+### Step 2. Prepare Input Files
+
+Ensure the assembled contigs file (EUnk.fasta) is located in the TempEukfinder directory.
+Copy and rename the file
+
+     ```bash
+     cp TempEukfinder/EUnk.fasta Eukfinder_long.fasta
+     ```
+
+
+
+Step 1. Parse centrifuge result:
 
 Before doing a supervised binning, first run Step0_Eukfinder_long.sh to get classification by Eukfinder_long.
 The centrifuge result in the tmps folder and the classified EUnk.fasta will be used for next step.
