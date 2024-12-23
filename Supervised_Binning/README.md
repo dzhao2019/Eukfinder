@@ -2,7 +2,7 @@
 
 ## Overview
 
-This workflow is designed to help recover eukaryotic genomes from metagenomic datasets through supervised binning after running Eukfinder. Below, you will find a detailed guide on how to set up and run the analysis, along with explanations for each step..
+This workflow is designed to help recover eukaryotic genomes from metagenomic datasets through supervised binning after running Eukfinder. Below, you will find a detailed guide on how to set up and run the analysis, along with explanations for each step.
 
 ### Workflow 
 
