@@ -37,9 +37,9 @@ This script will output a table with all the detected eukaryotic contigs:
    ```sh
 Eukaryotic species with more than 10 contigs detected by Centrifuge:
 
-| species                    | centrifuge_count    | 
-| :--------------------------|:--------------------|
-| Blastocystis sp. subtype 4 | 3300                |
-| Cyclospora cayetanensis    |  15                 |
+                      species  centrifuge_count
+0  Blastocystis sp. subtype 4              3300
+1     Cyclospora cayetanensis                15
+
 
    ```
