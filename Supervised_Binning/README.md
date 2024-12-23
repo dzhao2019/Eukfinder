@@ -44,30 +44,31 @@ Copy and rename the file
    ```sh
    cp TempEukfinder/EUnk.fasta Eukfinder_long.fasta
    ```
-2.1 Run Plast against nt database:
-run Step2.1_run_Plast.sh
+#### 2.1 Run Plast against nt database:
+Launch the shell run_Plast.sh
 
 DB=/scratch5/db/Eukfinder/nt2021/nt.fasta
 
 
-2.2 Run BLAST against Mitochondrial database to detect mitochondrial contigs
+#### 2.2 Run BLAST against Mitochondrial database to detect mitochondrial contigs
 
-Run Step2.2_Blast_mito.sh
+Run Blast_mito.sh
 
 BLASTDB=/scratch5/db/Eukfinder/Mitochondrial
 
-2.3 Use Metaxa2 to detect LSU and SSU rDNA sequences
+#### 2.3 Use Metaxa2 to detect LSU and SSU rDNA sequences
 
-Run Step2.3_Metaxa2_detection.sh
+Run Metaxa2_detection.sh
 
-2.4 Map reads to resulted EUnk.fasta to get depth of coverage file for binning
+#### 2.4 Map reads to resulted EUnk.fasta to get depth of coverage file for binning
 
-Run Step2.4_Depth.sh
+Run Depth.sh
+
 **OUTPUT FILE**: Eukfinder_long_EUnk.depth.txt
 Eukfinder_long_EUnk.depth.txt file has five columns:
 contigName, contigLen, totalAvgDepth, Eukfinder_long_sorted.bam, Eukfinder_long_sorted.bam-var
 
-2.5 Run MyCC
+#### 2.5 Run MyCC
 
 
    ```sh
