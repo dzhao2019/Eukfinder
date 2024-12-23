@@ -53,7 +53,9 @@ Launch the shell run_Plast.sh
    query=Eukfinder_long.fasta
    # Run plast
    DB=/scratch5/db/Eukfinder/nt2021/nt.fasta
-   plast -e 1E-5 -max-hit-per-query 1 -outfmt 1 -a 48 -p plastn -i $query -d $DB -force-query-order 1000 -o ${query::-6}.PLAST_nt.tsv
+   plast -e 1E-5 -max-hit-per-query 1 -outfmt 1 -a 48 -p plastn  \
+         -i $query -d $DB -force-query-order 1000  \
+         -o ${query::-6}.PLAST_nt.tsv
 
    ```
 
@@ -84,6 +86,18 @@ Eukfinder_long_BLAST4Mit.out
 
 Run Metaxa2_detection.sh
 
+   ```sh
+   mkdir Metaxa2_results
+   metaxa2 --cpu 20 -g SSU -i Eukfinder_long.fasta -o Eukfinder_long_metaxa2_SSU
+   metaxa2 --cpu 20 -g LSU -i Eukfinder_long.fasta -o Eukfinder_long_metaxa2_LSU
+   find . -type f -size 0 -delete
+   mv *_metaxa2_* Metaxa2_results
+   ```
+
+result folder:
+Metaxa2_results
+
+
 #### 2.4 Map reads to resulted EUnk.fasta to get depth of coverage file for binning
 
 Run Depth.sh
@@ -105,6 +119,11 @@ contigName, contigLen, totalAvgDepth, Eukfinder_long_sorted.bam, Eukfinder_long_
 
    ```
 
+result folder:
+Eukfinder_long_20210919_1721_4mer_0.7_cov
+Eukfinder_long_20210919_1732_5mer_0.7_cov
+Eukfinder_long_20210919_1748_56mer_0.7_cov
+
 ### Step 3. Parse Centrifuge Results
 
 Use the Parsing_centrifuge_results.py script to process Centrifuge results and translate TaxIDs to taxonomy.
@@ -121,6 +140,15 @@ Explanation:
 
 The output will contain the eukaryotic species detected and their corresponding counts.
 
+
+OUTPUT:
+   ```bash
+   Eukaryotic species with more than 10 contigs detected by Centrifuge:
+
+                         species  centrifuge_count
+   0  Blastocystis sp. subtype 4              3300
+   1     Cyclospora cayetanensis                15
+   ```
 
 ### Step 4. Parse Plast Results
 
