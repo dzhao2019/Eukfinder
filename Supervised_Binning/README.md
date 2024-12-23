@@ -14,11 +14,13 @@ INPUT FILE:(results from Step0_Eukfinder_long.sh)
 The centrifuge result in the tmps folder
 
 OUTPUT:
-Eukaryotic species with more than 10 contigs detected by Centrifuge:
+   ```sh
+    Eukaryotic species with more than 10 contigs detected by Centrifuge:
 
-                      species  centrifuge_count
-0  Blastocystis sp. subtype 4              3300
-1     Cyclospora cayetanensis                15
+                          species  centrifuge_count
+    0  Blastocystis sp. subtype 4              3300
+    1     Cyclospora cayetanensis                15
+   ```
 
 OUTPUT FILE:
 Step1_parsed_centrifuge_results_eukLong.txt
@@ -37,11 +39,13 @@ Eukfinder_long.PLAST_nt.tsv
 
 
 OUTPUT:
-Eukaryotic species with more than 10 contigs detected by Plast:
+   ```sh
+    Eukaryotic species with more than 10 contigs detected by Plast:
 
-                   species  Plast_count
-Blastocystis sp. subtype 4         3046
-      Blastocystis hominis           33
+                       species  Plast_count
+    Blastocystis sp. subtype 4         3046
+          Blastocystis hominis           33
+   ```
 
 OUTPUT FILE:
 Step2_parsed_Plast_Acc2tax_results.txt
