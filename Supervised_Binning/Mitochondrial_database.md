@@ -133,6 +133,9 @@ makeblastdb -in mitochondrial_database.fna -dbtype nucl -parse_seqids -taxid_map
 The final database file mitochondrial_database.fna contains:
 
 The mitochondrial genome (mitochondrion.1.1.genomic.fna).
+
 Bacterial genomes from Alphaproteobacteria, Deltaproteobacteria, and Gammaproteobacteria.
+
 Archaeal genomes from Lokiarchaeota, Thorarchaeota, Odinarchaeota, Methanobacteria, Halobacteria, Sulfolobus, and Thermoproteus.
+
 All sequences included are high-quality Reference Genomes at the Complete Assembly level.
