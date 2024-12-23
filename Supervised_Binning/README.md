@@ -4,7 +4,7 @@ Before doing a supervised binning, first run Step0_Eukfinder_long.sh to get clas
 The centrifuge result in the tmps folder and the classified EUnk.fasta will be used for next step.
 
 ------------------------------------------------------------------------------
-Step 1. Parse centrifuge result:
+## Step 1. Parse centrifuge result:
 
 source activate python36-generic
 python3 Step1_Parsing_centrifuge_results.py
@@ -14,18 +14,19 @@ INPUT FILE:(results from Step0_Eukfinder_long.sh)
 The centrifuge result in the tmps folder
 
 OUTPUT:
-   ```sh
+```sh
     Eukaryotic species with more than 10 contigs detected by Centrifuge:
 
                           species  centrifuge_count
     0  Blastocystis sp. subtype 4              3300
     1     Cyclospora cayetanensis                15
-   ```
+```
+
 
 OUTPUT FILE:
 Step1_parsed_centrifuge_results_eukLong.txt
 ------------------------------------------------------------------------------
-Step 2. Run Plast and Parse Plast result:
+## Step 2. Run Plast and Parse Plast result:
 
 run Step2.1_run_Plast.sh
 DB=/scratch5/db/Eukfinder/nt2021/nt.fasta
@@ -39,25 +40,27 @@ Eukfinder_long.PLAST_nt.tsv
 
 
 OUTPUT:
-   ```sh
+```sh
     Eukaryotic species with more than 10 contigs detected by Plast:
 
                        species  Plast_count
     Blastocystis sp. subtype 4         3046
           Blastocystis hominis           33
-   ```
+
 
 OUTPUT FILE:
 Step2_parsed_Plast_Acc2tax_results.txt
 ------------------------------------------------------------------------------
-Step 3. Run Step3_Blast_mito.sh
+## Step 3. Run Step3_Blast_mito.sh
+
 BLASTDB=/scratch5/db/Eukfinder/Mitochondrial
+
 
 OUTPUT FILE:
 Eukfinder_long_BLAST4Mit.out
 ------------------------------------------------------------------------------
 
-Step 4. 
+## Step 4. Binning
 
 Step4.1_Metaxa2_detection.sh
 Use Metaxa2 to detect LSU and SSU rDNA sequences
@@ -79,7 +82,7 @@ source activate python36-generic
 python3 Step4.5_binning_results.tsv
 
 ------------------------------------------------------------------------------
-Step 5. Parse all results to generate recovered eukaryotic genomes.
+## Step 5. Parse all results to generate recovered eukaryotic genomes.
 
 source activate python36-generic
 python3 Step5_Parsing_binning_resutls.py
