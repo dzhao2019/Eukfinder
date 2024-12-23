@@ -21,11 +21,11 @@ The centrifuge result in the tmps folder and the classified EUnk.fasta will be u
 
 **INPUT FILE**: (results from Step0_Eukfinder_long.sh)
 
-       The centrifuge result in the tmps folder
+The centrifuge result in the tmps folder
 
 **OUTPUT FILE**:
 
-       Step1_parsed_centrifuge_results_eukLong.txt
+Step1_parsed_centrifuge_results_eukLong.txt
 
    ```sh
    source activate python36-generic
@@ -62,11 +62,11 @@ Then, run this python script to parse PLAST result:
 
 **INPUT FILE**: (results from Step2.1_run_Plast.sh)
 
-       Eukfinder_long.PLAST_nt.tsv
+Eukfinder_long.PLAST_nt.tsv
 
 **OUTPUT FILE**:
 
-       Step2_parsed_Plast_Acc2tax_results.txt
+Step2_parsed_Plast_Acc2tax_results.txt
 
 
 This script will output a table with all the detected eukaryotic contigs:
@@ -130,7 +130,7 @@ Parse binning results
 
 **OUTPUT FILE**:
 
-       eukaryotic nuclear genome and mitochondrial genome in fasta format
+eukaryotic nuclear genome and mitochondrial genome in fasta format
 
    ```sh
    source activate python36-generic
