@@ -13,18 +13,17 @@ python3 Step1_Parsing_centrifuge_results.py
 INPUT FILE:(results from Step0_Eukfinder_long.sh)
 The centrifuge result in the tmps folder
 
-OUTPUT:
-```sh
-    Eukaryotic species with more than 10 contigs detected by Centrifuge:
-
-                          species  centrifuge_count
-    0  Blastocystis sp. subtype 4              3300
-    1     Cyclospora cayetanensis                15
-```
-
-
 OUTPUT FILE:
 Step1_parsed_centrifuge_results_eukLong.txt
+
+OUTPUT:
+
+>     Eukaryotic species with more than 10 contigs detected by Centrifuge:
+> 
+>                           species  centrifuge_count
+>     0  Blastocystis sp. subtype 4              3300
+>     1     Cyclospora cayetanensis                15
+
 ------------------------------------------------------------------------------
 ## Step 2. Run Plast and Parse Plast result:
 
@@ -38,18 +37,20 @@ python3 Step2.2_Parsing_Plast_results.py
 INPUT FILE:(results from Step2.1_run_Plast.sh)
 Eukfinder_long.PLAST_nt.tsv
 
-
-OUTPUT:
-```sh
-    Eukaryotic species with more than 10 contigs detected by Plast:
-
-                       species  Plast_count
-    Blastocystis sp. subtype 4         3046
-          Blastocystis hominis           33
-
-
 OUTPUT FILE:
 Step2_parsed_Plast_Acc2tax_results.txt
+
+
+OUTPUT:
+
+>    Eukaryotic species with more than 10 contigs detected by Plast:
+> 
+>                        species  Plast_count
+>     Blastocystis sp. subtype 4         3046
+>           Blastocystis hominis           33
+
+
+
 ------------------------------------------------------------------------------
 ## Step 3. Run Step3_Blast_mito.sh
 
