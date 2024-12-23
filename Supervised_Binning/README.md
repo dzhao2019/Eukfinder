@@ -11,7 +11,7 @@ This workflow is designed to help recover eukaryotic genomes from metagenomic da
 You need the following input files before starting:
 
 - A FASTA file of assembled contigs (EUnk.fasta from Eukfinder_short or Eukfinder_long).
-- Results from various tools, including Centrifuge, Plast, Blast, Metaxa2, and MyCC.
+- Results from various tools, including Centrifuge, Plast, Blast, Metaxa2, Metabat2, and MyCC.
 
 2. Run Parsing Scripts
 Scripts are provided to process results from the tools mentioned above and integrate them into a single analysis pipeline.
@@ -31,7 +31,9 @@ Ensure that you have the following tools and Python libraries installed:
 - Python (version 3.6+)
 - pandas, Centrifuge, Plast (included in Eukfinder)
 - Biopython
+
   Install via pip install biopython.
+  
 - Blast, MyCC, and Metaxa2.
 
 ### Step 2. Prepare Input Files
@@ -39,133 +41,136 @@ Ensure that you have the following tools and Python libraries installed:
 Ensure the assembled contigs file (EUnk.fasta) is located in the TempEukfinder directory.
 Copy and rename the file
 
-     ```bash
-     cp TempEukfinder/EUnk.fasta Eukfinder_long.fasta
-     ```
-
-
-
-Step 1. Parse centrifuge result:
-
-Before doing a supervised binning, first run Step0_Eukfinder_long.sh to get classification by Eukfinder_long.
-The centrifuge result in the tmps folder and the classified EUnk.fasta will be used for next step.
-
-
-**INPUT FILE**: (results from Step0_Eukfinder_long.sh)
-
-The centrifuge result in the tmps folder
-
-**OUTPUT FILE**:
-
-Step1_parsed_centrifuge_results_eukLong.txt
-
    ```sh
-   source activate python36-generic
-   python3 Step1_Parsing_centrifuge_results.py
+   cp TempEukfinder/EUnk.fasta Eukfinder_long.fasta
    ```
+2.1 Run Plast against nt database:
+run Step2.1_run_Plast.sh
 
-This script will output a table with all the detected eukaryotic contigs:
-
-   ```sh
-Eukaryotic species with more than 10 contigs detected by Centrifuge:
-
-                      species  centrifuge_count
-0  Blastocystis sp. subtype 4              3300
-1     Cyclospora cayetanensis                15
-
-
-   ```
-
-------------------------------
-
-## Step 2. Run Plast and Parse Plast result
-
-First, run Step2.1_run_Plast.sh
 DB=/scratch5/db/Eukfinder/nt2021/nt.fasta
 
 
-Then, run this python script to parse PLAST result:
+2.2 Run BLAST against Mitochondrial database to detect mitochondrial contigs
 
-   ```sh
-   source activate python36-generic
-   python3 Step2.2_Parsing_Plast_results.py
-   ```
-
-
-**INPUT FILE**: (results from Step2.1_run_Plast.sh)
-
-Eukfinder_long.PLAST_nt.tsv
-
-**OUTPUT FILE**:
-
-Step2_parsed_Plast_Acc2tax_results.txt
-
-
-This script will output a table with all the detected eukaryotic contigs:
-
-   ```sh
-Eukaryotic species with more than 10 contigs detected by Plast:
-
-                   species  Plast_count
-Blastocystis sp. subtype 4         3046
-      Blastocystis hominis           33
-
-
-
-   ```
-       
-------------------------------
-
-## Step 3. Run BLAST against Mitochondrial database to detect mitochondrial contigs
-
-Run Step3_Blast_mito.sh
+Run Step2.2_Blast_mito.sh
 
 BLASTDB=/scratch5/db/Eukfinder/Mitochondrial
 
+2.3 Use Metaxa2 to detect LSU and SSU rDNA sequences
 
-**OUTPUT FILE**:
+Run Step2.3_Metaxa2_detection.sh
 
-       Eukfinder_long_BLAST4Mit.out
+2.4 Map reads to resulted EUnk.fasta to get depth of coverage file for binning
 
+Run Step2.4_Depth.sh
+**OUTPUT FILE**: Eukfinder_long_EUnk.depth.txt
+Eukfinder_long_EUnk.depth.txt file has five columns:
+contigName, contigLen, totalAvgDepth, Eukfinder_long_sorted.bam, Eukfinder_long_sorted.bam-var
 
-------------------------------
-
-## Step 4. Depth of coverage and binning
-
-Step4.1_Metaxa2_detection.sh
-Use Metaxa2 to detect LSU and SSU rDNA sequences
-
-Step4.2_Depth.sh
-Map reads to resulted EUnk.fasta to get depth of coverage file for binning
-
-Step4.3_MyCC
-Run MyCC
-
-Step4.4_MaxBin_Metaxa2_Binning.sh
-Run MaxBin Metaxa2
-Notes: the results from MaxBin and Metaxa2 are not used for supervised binning
-
-Step4.5_Reading_binning_results.py
-Parse binning results
+2.5 Run MyCC
 
 
    ```sh
-   source activate python36-generic
-   python3 Step4.5_binning_results.tsv
+   export PATH=/opt/perun/myCC/Tools:$PATH
+   source  /scratch2/software/python2-packages/bin/activate
+   cat Eukfinder_long_EUnk.depth.txt | cut -f 1,3 > Eukfinder_long_EUnk_depth_for_binning.txt
+   MyCC.py Eukfinder_long.fasta  -a Eukfinder_long_EUnk_depth_for_binning.txt 4mer
+   MyCC.py Eukfinder_long.fasta  -a Eukfinder_long_EUnk_depth_for_binning.txt 5mer
+   MyCC.py Eukfinder_long.fasta  -a Eukfinder_long_EUnk_depth_for_binning.txt 56mer
+
    ```
-------------------------------
 
-## Step 5. Parse all results to generate recovered eukaryotic genomes.
+### Step 3. Parse Centrifuge Results
 
+Use the Parsing_centrifuge_results.py script to process Centrifuge results and translate TaxIDs to taxonomy.
 
-**INPUT FILE**: all the results from previous steps
-
-**OUTPUT FILE**:
-
-eukaryotic nuclear genome and mitochondrial genome in fasta format
-
-   ```sh
+   ```bash
    source activate python36-generic
-   python3 Step5_Parsing_binning_resutls.py
+   python3 Parsing_centrifuge_results.py
    ```
+Explanation:
+
+-c: Path to the Centrifuge results file.
+
+-o: Output file for parsed results.
+
+The output will contain the eukaryotic species detected and their corresponding counts.
+
+
+### Step 4. Parse Plast Results
+
+
+Use the Parsing_Plast_results.py script to process Plast results and annotate them with taxonomy using the acc2tax database.
+
+   ```bash
+   source activate python36-generic
+   python3 Parsing_Plast_results.py
+   ```
+
+Explanation:
+
+-i: Input Plast results file.
+
+-d: Path to the acc2tax database.
+
+-o: Output file for parsed Plast results.
+
+This step annotates Plast results with domain, phylum, genus, and species.
+
+### Step 5: Parse MyCC binning Results
+
+Use the Reading_binning_results.py script to process MyCC binning results and combine the bins into one table.
+
+   ```bash
+   source activate python36-generic
+   python3 Reading_binning_results.py
+   ```
+
+Explanation:
+
+-i: Input fasta file.
+
+-m: Path to the folder containing MyCC results.
+
+
+### Step 6: Combine All Results and Perform Supervised Binning
+
+Run the main script, Supervised_Binning.py, to combine all parsed results and generate two FASTA files: the nuclear genome and the mitochondrial genome.
+
+
+   ```bash
+   source activate python36-generic
+   python3 Supervised_Binning.py
+   ```
+
+Explanation:
+
+-i: Input FASTA file.
+
+-c: Parsed Centrifuge results.
+
+-p: Parsed Plast results.
+
+-d: Depth of coverage results.
+
+-b: Binning results.
+
+Outputs:
+
+Eukfinder_long_Blastocystis.fas: Recovered eukaryotic nuclear genome.
+
+Eukfinder_long_Mito_Blastocystis.fas: Recovered mitochondrial genome.
+
+
+### Step 7: Validate the Results
+
+Check the generated FASTA files:
+
+Nuclear genome (Eukfinder_long_Blastocystis.fas).
+
+Mitochondrial genome (Eukfinder_long_Mito_Blastocystis.fas).
+
+Review the combined results in Combined_binning_results_CPB_Mito.tsv.
+
+
 
