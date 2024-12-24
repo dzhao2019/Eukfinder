@@ -158,7 +158,9 @@ Metaxa2_results
 Run Depth.sh
 
 **OUTPUT FILE**: Eukfinder_long_EUnk.depth.txt
+
 Eukfinder_long_EUnk.depth.txt file has five columns:
+
 contigName, contigLen, totalAvgDepth, Eukfinder_long_sorted.bam, Eukfinder_long_sorted.bam-var
 
 #### 2.5 Run MyCC
@@ -175,8 +177,11 @@ contigName, contigLen, totalAvgDepth, Eukfinder_long_sorted.bam, Eukfinder_long_
    ```
 
 result folder:
+
 Eukfinder_long_20210919_1721_4mer_0.7_cov
+
 Eukfinder_long_20210919_1732_5mer_0.7_cov
+
 Eukfinder_long_20210919_1748_56mer_0.7_cov
 
 
