@@ -145,7 +145,7 @@ def translate_taxid_superkingdom():
 
     # Combine original centrifuge results with taxonomy results
     final_df = pd.concat([df_centrifuge, taxonomy_df], axis=1)
-    final_df.to_csv(output_file, sep='\t', index=True)
+    final_df.to_csv(args.output, sep='\t', index=True)
 
     # Count occurrences of species where domain is 'Eukaryota'
     counts_e = final_df[final_df['centrifuge domain'] == 'Eukaryota']['centrifuge species'].value_counts()
