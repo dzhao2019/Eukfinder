@@ -69,7 +69,7 @@ The pipeline produces two main outputs:
 
 - A FASTA file containing the recovered eukaryotic nuclear genome.
 - A FASTA file containing the recovered mitochondrial genome.
-
+**********
 ## Step-by-Step Instructions
 
 ### Step 1. Prepare the Environment
@@ -83,6 +83,8 @@ Ensure that you have the following tools and Python libraries installed:
   Install via pip install biopython.
   
 - SAMtools, Blast, MyCC, Metabat2, and Metaxa2.
+
+-----------
 
 ### Step 2. Prepare Input Files
 
@@ -173,6 +175,9 @@ Eukfinder_long_20210919_1721_4mer_0.7_cov
 Eukfinder_long_20210919_1732_5mer_0.7_cov
 Eukfinder_long_20210919_1748_56mer_0.7_cov
 
+
+-----------
+
 ### Step 3. Parse Centrifuge Results
 
 Use the Parsing_centrifuge_results.py script to process Centrifuge results and translate TaxIDs to taxonomy.
@@ -199,6 +204,9 @@ OUTPUT:
    1     Cyclospora cayetanensis                15
    ```
 
+
+-----------
+
 ### Step 4. Parse Plast Results
 
 
@@ -219,6 +227,9 @@ Explanation:
 
 This step annotates Plast results with domain, phylum, genus, and species.
 
+
+-----------
+
 ### Step 5: Parse MyCC binning Results
 
 Use the Reading_binning_results.py script to process MyCC binning results and combine the bins into one table.
@@ -235,9 +246,16 @@ Explanation:
 -m: Path to the folder containing MyCC results.
 
 
+-----------
+
+
 ### Step 6: Combine All Results and Perform Supervised Binning
 
 Run the main script, Supervised_Binning.py, to combine all parsed results and generate two FASTA files: the nuclear genome and the mitochondrial genome.
+
+6.1 Combine Results: Combine MyCC, Plast, BLAST, Metaxa2, and depth coverage results into a single table.
+
+6.2 Filter Contigs: Apply the inclusion criteria outlined in the overview to filter contigs.
 
 
    ```bash
@@ -262,6 +280,9 @@ Outputs:
 Eukfinder_long_Blastocystis.fas: Recovered eukaryotic nuclear genome.
 
 Eukfinder_long_Mito_Blastocystis.fas: Recovered mitochondrial genome.
+
+
+-----------
 
 
 ### Step 7: Validate the Results
