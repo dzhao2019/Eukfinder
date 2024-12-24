@@ -2,8 +2,6 @@
 
 ## Overview
 
-## Overview
-
 This workflow is designed to guide you through recovering eukaryotic genomes from metagenomic datasets using supervised binning, based on the contigs classified as eukaryotic or unknown (EUnk) by Eukfinder.
 
 ### Summary of Approach:
