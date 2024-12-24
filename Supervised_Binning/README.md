@@ -56,19 +56,23 @@ Note: The combination of 5-mer and 6-mer is referred to as "5&6-mer" in this fig
 ### Workflow 
 
 1. Prepare Input Files
+   
 You need the following input files before starting:
 
 - A FASTA file of assembled contigs (EUnk.fasta from Eukfinder_short or Eukfinder_long).
 - Results from various tools, including Centrifuge, Plast, Blast, Metaxa2, Metabat2, and MyCC.
 
 2. Run Parsing Scripts
+   
 Scripts are provided to process results from the tools mentioned above and integrate them into a single analysis pipeline.
 
 3. Generate Output
+   
 The pipeline produces two main outputs:
 
 - A FASTA file containing the recovered eukaryotic nuclear genome.
 - A FASTA file containing the recovered mitochondrial genome.
+  
 **********
 ## Step-by-Step Instructions
 
