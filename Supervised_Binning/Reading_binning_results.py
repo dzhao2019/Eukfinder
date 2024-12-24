@@ -73,13 +73,10 @@ def main(fasta_file, mycc_directory):
     # Parse MyCC binning results
     mycc_df = parse_mycc_results(mycc_directory)
 
-    # Combine all results into a single DataFrame and fill missing values
-    combined_results = pd.concat([maxbin_df, metabat_df, mycc_df], axis=1).fillna("unbinned")
-
     # Output the combined results to a TSV file
     output_file = "binning_results.tsv"
     print(f"Writing combined results to {output_file}...")
-    combined_results.to_csv(output_file, sep='\t', index_label="seqID")
+   mycc_df.to_csv(output_file, sep='\t', index_label="seqID")
     print("Finished.")
 
 
