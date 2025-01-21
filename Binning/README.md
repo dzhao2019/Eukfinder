@@ -1,8 +1,8 @@
-# Supervised Binning for Recovering Eukaryotic Genomes from Metagenomes
+# Binning Workflow for Recovering Eukaryotic Genomes from Metagenomes
 
 ## Overview
 
-This workflow is designed to guide you through recovering eukaryotic genomes from metagenomic datasets using supervised binning, based on the contigs classified as eukaryotic or unknown (EUnk) by Eukfinder.
+This workflow is designed to guide you through recovering eukaryotic genomes from metagenomic datasets using contigs classified as eukaryotic or unknown by Eukfinder.
 
 ### Summary of Approach:
 
@@ -66,6 +66,26 @@ You need the following input files before starting:
    
 Scripts are provided to process results from the tools mentioned above and integrate them into a single analysis pipeline.
 
+**Requirements:**
+
+* Pre-assembled shotgun metagenomic sample (assembly.fasta)
+
+* per-scaffold coverage information (depth of coverage, depth.tsv from MetaBat2 (33)(jgi_summarize_bam_contig_depths)
+
+* Eukfinder (EUnk.fasta, Up_grouped_by_Eukaryota.tsv)
+
+* Metaxa2 (LSU/SSU rRNA and mitochondrial sequences)
+
+* MyCC results
+
+**Optional (but recommended):**
+
+* PLAST nt search
+* Diamond nr search
+* Kraken2 search
+* Blast against mitochondrial DB
+
+
 3. Generate Output
    
 The pipeline produces two main outputs:
@@ -76,7 +96,9 @@ The pipeline produces two main outputs:
 **********
 ## Step-by-Step Instructions
 
-### Step 1. Prepare the Environment
+### Step 1. Classify with Eukfinder
+
+### Step 2. Prepare the Environment
 
 Ensure that you have the following tools and Python libraries installed:
 
@@ -90,81 +112,11 @@ Ensure that you have the following tools and Python libraries installed:
 
 -----------
 
-### Step 2. Prepare Input Files
+### Step 3. Automated binning
 
-Ensure the assembled contigs file (EUnk.fasta) is located in the TempEukfinder directory.
-
-Copy and rename the file
-
-   ```sh
-   cp TempEukfinder/EUnk.fasta Eukfinder_long.fasta
-   ```
-
-#### 2.1 Run Plast against nt database:
-Launch the shell run_Plast.sh
-
-   ```sh
-   source activate eukfinder
-   query=Eukfinder_long.fasta
-   # Run plast
-   DB=/scratch5/db/Eukfinder/nt2021/nt.fasta
-   plast -e 1E-5 -max-hit-per-query 1 -outfmt 1 -a 48 -p plastn  \
-         -i $query -d $DB -force-query-order 1000  \
-         -o ${query::-6}.PLAST_nt.tsv
-
-   ```
-
-result file:
-Eukfinder_long.PLAST_nt.tsv
-
-#### 2.2 Run BLAST against Mitochondrial database to detect mitochondrial contigs
-
-Run Blast_mito.sh
-
-   ```sh
-   cquery=Eukfinder_long.fasta
-   source activate blast
-   export BLASTDB=/scratch5/db/Eukfinder/Mitochondrial
-   DB=mito_blast_db
-   blastn -db $DB -query $query -out ${query::-6}_BLAST4Mit.out -num_threads 30 \
-          -outfmt "6 qseqid sseqid stitle evalue pident qcovhsp nident mismatch length slen qlen qstart qend sstart send staxids sscinames sskingdoms"  \
-          -evalue 1E-5 -max_hsps 1
-   conda deactivate
-
-   ```
-
-result file:
-Eukfinder_long_BLAST4Mit.out
-
-
-#### 2.3 Use Metaxa2 to detect LSU and SSU rDNA sequences
-
-Run Metaxa2_detection.sh
-
-   ```sh
-   mkdir Metaxa2_results
-   metaxa2 --cpu 20 -g SSU -i Eukfinder_long.fasta -o Eukfinder_long_metaxa2_SSU
-   metaxa2 --cpu 20 -g LSU -i Eukfinder_long.fasta -o Eukfinder_long_metaxa2_LSU
-   find . -type f -size 0 -delete
-   mv *_metaxa2_* Metaxa2_results
-   ```
-
-result folder:
-Metaxa2_results
-
-
-#### 2.4 Map reads to resulted EUnk.fasta to get depth of coverage file for binning
-
-Run Depth.sh
-
-**OUTPUT FILE**: Eukfinder_long_EUnk.depth.txt
-
-Eukfinder_long_EUnk.depth.txt file has five columns:
-
-contigName, contigLen, totalAvgDepth, Eukfinder_long_sorted.bam, Eukfinder_long_sorted.bam-var
-
-#### 2.5 Run MyCC
-
+This step is important for separating multiple eukaryotic genomes in your sample.
+MyCC 
+Three separate MyCC analyses with different k-mers (4-mer, 5-mer, 5-6-mer)
 
    ```sh
    export PATH=/opt/perun/myCC/Tools:$PATH
@@ -184,87 +136,25 @@ Eukfinder_long_20210919_1732_5mer_0.7_cov
 
 Eukfinder_long_20210919_1748_56mer_0.7_cov
 
+#### 4 Metaxa2
 
------------
+Run Metaxa2
 
-### Step 3. Parse Centrifuge Results
+   ```sh
+   metaxa2 --cpu 20 -g SSU -i Eukfinder_long.fasta -o Eukfinder_long_metaxa2_SSU
+   metaxa2 --cpu 20 -g LSU -i Eukfinder_long.fasta -o Eukfinder_long_metaxa2_LSU
 
-Use the Parsing_centrifuge_results.py script to process Centrifuge results and translate TaxIDs to taxonomy.
-
-   ```bash
-   source activate python36-generic
-   python3 Parsing_centrifuge_results.py
-   ```
-Explanation:
-
--c: Path to the Centrifuge results file.
-
--o: Output file for parsed results.
-
-The output will contain the eukaryotic species detected and their corresponding counts.
-
-
-OUTPUT:
-   ```bash
-   Eukaryotic species with more than 10 contigs detected by Centrifuge:
-
-                         species  centrifuge_count
-   0  Blastocystis sp. subtype 4              3300
-   1     Cyclospora cayetanensis                15
    ```
 
 
------------
+#### 5 Run run binning.py
 
-### Step 4. Parse Plast Results
-
-
-Use the Parsing_Plast_results.py script to process Plast results and annotate them with taxonomy using the acc2tax database.
-
-   ```bash
-   source activate python36-generic
-   python3 Parsing_Plast_results.py
-   ```
-
-Explanation:
-
--i: Input Plast results file.
-
--d: Path to the acc2tax database.
-
--o: Output file for parsed Plast results.
-
-This step annotates Plast results with domain, phylum, genus, and species.
-
-
------------
-
-### Step 5: Parse MyCC binning Results
-
-Use the Reading_binning_results.py script to process MyCC binning results and combine the bins into one table.
-
-   ```bash
-   source activate python36-generic
-   python3 Reading_binning_results.py
-   ```
-
-Explanation:
-
--i: Input fasta file.
-
--m: Path to the folder containing MyCC results.
-
-
------------
-
-
-### Step 6: Combine All Results and Perform Supervised Binning
 
 Run the main script, Supervised_Binning.py, to combine all parsed results and generate two FASTA files: the nuclear genome and the mitochondrial genome.
 
-6.1 Combine Results: Combine MyCC, Plast, BLAST, Metaxa2, and depth coverage results into a single table.
+5.1 Combine Results: Combine MyCC, Plast, BLAST, Metaxa2, and depth coverage results into a single table.
 
-6.2 Filter Contigs: Apply the inclusion criteria outlined in the overview to filter contigs.
+5.2 Filter Contigs: Apply the inclusion criteria outlined in the overview to filter contigs.
 
 
    ```bash
